@@ -88,10 +88,10 @@ jobs:
 
             | 系统 | 文件 |
             | --- | --- |
-            | macOS (Apple Silicon) | `*-arm64.dmg` |
-            | macOS (Intel) | `*.dmg`（不带 arm64 后缀） |
-            | Windows 安装版 | `*-Setup-*.exe` |
-            | Windows 免安装版 | `*-portable.exe` |
+            | macOS (Apple Silicon) | `kiana-neko-pet-*-arm64.dmg` |
+            | macOS (Intel) | `kiana-neko-pet-*-x64.dmg` |
+            | Windows 安装版 | `kiana-neko-pet-setup-*.exe` |
+            | Windows 免安装版 | `kiana-neko-pet-*-portable.exe` |
 
             > **macOS 提示「无法验证开发者」**：安装包未做 Apple 公证。
             > 右键点 App → 打开 → 再点「打开」，或执行

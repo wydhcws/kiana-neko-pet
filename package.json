@@ -82,6 +82,7 @@
     "mac": {
       "category": "public.app-category.entertainment",
       "icon": "assets/icon.png",
+      "artifactName": "${name}-${version}-${arch}.${ext}",
       "target": [
         {
           "target": "dmg",
@@ -141,7 +142,7 @@
       ]
     },
     "nsis": {
-      "artifactName": "琪亚娜猫娘-Setup-${version}.exe",
+      "artifactName": "${name}-setup-${version}.exe",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
@@ -149,7 +150,7 @@
       "shortcutName": "琪亚娜猫娘"
     },
     "portable": {
-      "artifactName": "琪亚娜猫娘-${version}-portable.exe"
+      "artifactName": "${name}-${version}-portable.exe"
     }
   }
 }

@@ -39,10 +39,13 @@ Electron + three.js ｜ macOS & Windows ｜ 内置薪炎 / 终焉 / 歌姬 / 小
 
 | 系统 | 文件 | 说明 |
 | --- | --- | --- |
-| macOS (Apple Silicon) | `琪亚娜猫娘-x.x.x-arm64.dmg` | M1/M2/M3/M4 |
-| macOS (Intel) | `琪亚娜猫娘-x.x.x.dmg` | |
-| Windows | `琪亚娜猫娘-Setup-x.x.x.exe` | 安装版 |
-| Windows | `琪亚娜猫娘-x.x.x-portable.exe` | 免安装，绿色版 |
+| macOS (Apple Silicon) | `kiana-neko-pet-x.x.x-arm64.dmg` | M1/M2/M3/M4 |
+| macOS (Intel) | `kiana-neko-pet-x.x.x-x64.dmg` | |
+| Windows | `kiana-neko-pet-setup-x.x.x.exe` | 安装版 |
+| Windows | `kiana-neko-pet-x.x.x-portable.exe` | 免安装，绿色版 |
+
+> 安装包文件名用的是英文（GitHub 对中文文件名的支持有问题，下载时会丢字），
+> 装进电脑后应用名、快捷方式仍然是「琪亚娜猫娘」。
 
 > **macOS 首次打开提示「无法验证开发者」**：安装包未做 Apple 公证（需要付费开发者账号）。
 > 右键点击 App → 打开 → 再次点「打开」即可；或执行
