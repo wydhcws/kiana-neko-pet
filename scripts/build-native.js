@@ -46,7 +46,10 @@ if (!has('cmake')) {
 
 const build = path.join(ADAPTER, 'build');
 fs.mkdirSync(build, { recursive: true });
-execFileSync('cmake', ['..', '-DCMAKE_BUILD_TYPE=Release'], { cwd: build, stdio: 'inherit' });
+// 在 arm64 机器上给 x64 安装包编译时，CI 会通过 NATIVE_ARCH 指定目标架构
+const cmakeArgs = ['..', '-DCMAKE_BUILD_TYPE=Release'];
+if (process.env.NATIVE_ARCH) cmakeArgs.push(`-DCMAKE_OSX_ARCHITECTURES=${process.env.NATIVE_ARCH}`);
+execFileSync('cmake', cmakeArgs, { cwd: build, stdio: 'inherit' });
 execFileSync('cmake', ['--build', '.'], { cwd: build, stdio: 'inherit' });
 console.log('✓ MediaRemoteAdapter.framework');
 

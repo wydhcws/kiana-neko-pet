@@ -18,9 +18,16 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-latest
-            name: macOS
-            cmd: npm run dist:mac
+          # 两个架构必须分开跑：同一台机器连续构建 arm64/x64 两个 DMG 时
+          # 卷名相同（/Volumes/琪亚娜猫娘 x.x.x），hdiutil 卸载不干净会导致第二个失败
+          - os: macos-15
+            name: macOS-arm64
+            nativeArch: arm64
+            cmd: npm run dist:mac -- --arm64
+          - os: macos-15
+            name: macOS-x64
+            nativeArch: x86_64
+            cmd: npm run dist:mac -- --x64
           - os: windows-latest
             name: Windows
             cmd: npm run dist:win
@@ -44,6 +51,9 @@ jobs:
       - name: 编译原生组件（macOS）
         if: runner.os == 'macOS'
         run: npm run build:native
+        env:
+          # runner 是 arm64，x64 安装包需要的框架得强制按 x86_64 编译
+          NATIVE_ARCH: ${{ matrix.nativeArch }}
 
       - name: 生成图标
         run: npm run icon
