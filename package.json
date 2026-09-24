@@ -60,6 +60,22 @@
       {
         "from": "node_modules/three/examples/jsm",
         "to": "app/node_modules/three/examples/jsm"
+      },
+      {
+        "from": "models/Kiana Kaslana - Herrscher of Flamescion",
+        "to": "app/models/Kiana Kaslana - Herrscher of Flamescion"
+      },
+      {
+        "from": "models/Kiana Kaslana - Herrscher of Finality",
+        "to": "app/models/Kiana Kaslana - Herrscher of Finality"
+      },
+      {
+        "from": "models/Kiana Kaslana - World Diva",
+        "to": "app/models/Kiana Kaslana - World Diva"
+      },
+      {
+        "from": "models/琪亚娜 咚琪小礼裙",
+        "to": "app/models/琪亚娜 咚琪小礼裙"
       }
     ],
     "mac": {
@@ -124,6 +140,7 @@
       ]
     },
     "nsis": {
+      "artifactName": "琪亚娜猫娘-Setup-${version}.exe",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,

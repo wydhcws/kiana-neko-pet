@@ -19,20 +19,28 @@ app.commandLine.appendSwitch('disable-features', 'HardwareMediaKeyHandling,Media
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
 
 // 模型搜索目录（按顺序找，先找到先用）：
-//   1. 项目 / 安装目录下的 models/  —— 推荐位置，「打开模型文件夹…」菜单指向这里
-//   2. ~/Downloads                 —— 兼容早期版本的解压位置
-// 模型是第三方二次创作作品（版权属 miHoYo，编辑者见各自的「使用规则.txt」），
-// 规则明确「请勿二次配布」，所以仓库和安装包都不包含模型，由用户自行下载放入。
-const modelRoots = () => [
-  app.isPackaged ? path.join(app.getPath('userData'), 'models') : path.join(__dirname, 'models'),
-  path.join(os.homedir(), 'Downloads'),
-];
+//   1. 用户 models/ 目录 —— 「打开模型文件夹…」菜单指向这里，用户自己放的模型优先
+//   2. 安装包内置的 models/ —— 随安装包一起分发的几个模型
+//   3. ~/Downloads        —— 兼容早期版本的解压位置
+// 模型是第三方二次创作作品（版权属 miHoYo，编辑者见各自的「使用规则.txt」）。
+const modelRoots = () => {
+  const roots = [];
+  if (app.isPackaged) {
+    roots.push(path.join(app.getPath('userData'), 'models'));
+    roots.push(path.join(process.resourcesPath, 'app', 'models'));
+  } else {
+    roots.push(path.join(__dirname, 'models'));
+  }
+  roots.push(path.join(os.homedir(), 'Downloads'));
+  return roots;
+};
 const modelsDir = () => modelRoots()[0];
 // 已适配的 MMD 模型。ratio：窗口宽高比；frameX：镜头水平偏移（按身高比例），给偏向一侧的披风/裙摆留位置
 const MODELS = [
   { id: 'flamescion', label: '薪炎律者', dir: 'Kiana Kaslana - Herrscher of Flamescion', pmx: 'Kiana Kaslana - Herrscher of Flamescion.pmx', ratio: 0.88, frameX: 0.1 },
   { id: 'finality', label: '终焉律者', dir: 'Kiana Kaslana - Herrscher of Finality', pmx: 'Kiana Kaslana.pmx', ratio: 0.74, frameX: -0.04 },
   { id: 'diva', label: '崩坏的歌姬 World Diva', dir: 'Kiana Kaslana - World Diva', pmx: 'Kiana Kaslana - World Diva.pmx', ratio: 0.62, frameX: 0 },
+  { id: 'dongqi-dress', label: '咚琪小礼裙', dir: '琪亚娜 咚琪小礼裙', pmx: '琪亚娜 咚琪小礼裙1.0.pmx', ratio: 0.64, frameX: 0.009 },
 ];
 // ---------- 模组库 ----------
 // 按「游戏 / 人物 / 模型」组织的模型合集，扫出来后在菜单里按人物分组选。

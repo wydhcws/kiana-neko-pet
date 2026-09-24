@@ -26,8 +26,8 @@ NOTICE / 附加声明
 This license applies ONLY to the source code in this repository.
 本协议仅适用于本仓库中的源代码。
 
-It does NOT cover, and this project does NOT distribute:
-以下内容不在本协议覆盖范围内，本项目也不分发它们：
+It does NOT cover the following:
+以下内容不在本协议覆盖范围内：
 
 1. "Honkai Impact 3rd" (崩坏3), the character Kiana Kaslana (琪亚娜·卡斯兰娜),
    and any related artwork, music, or other assets, which are the property of
@@ -36,12 +36,19 @@ It does NOT cover, and this project does NOT distribute:
    《崩坏3》及琪亚娜·卡斯兰娜等角色的一切版权归 miHoYo / HoYoverse 所有。
    本项目为非商业性质的非官方同人作品，与 miHoYo 官方无关联。
 
-2. Any third-party MMD (PMX) models. Such models are redistribution-restricted
-   by their authors ("請勿二次配布" / no redistribution) and are NOT included
-   in this repository or in any release package. Users must obtain them from
-   their original sources and comply with each model's own terms of use.
-   任何第三方 MMD (PMX) 模型。这些模型的使用规则明确禁止二次配布，
-   因此不包含在本仓库及任何发行包中，请用户自行从原发布页获取并遵守其使用规则。
+2. The MMD (PMX) models bundled with this project (Herrscher of Flamescion,
+   Herrscher of Finality, World Diva, and the Dongqi dress model). These models
+   were made by community model authors (principally 神帝宇 / Shendiyu), the
+   underlying characters are copyright miHoYo, and they are NOT covered by the
+   MIT license. They are included in this free, non-commercial fan project only
+   for convenience, and will be removed from the repository and release packages
+   promptly upon request by the rights holders. Any other MMD models must be
+   obtained by users from their original sources under those models' own terms.
+   本项目内置的 MMD 模型（薪炎律者、终焉律者、World Diva、咚琪小礼裙）。
+   这些模型由社区模型作者制作（主要为神帝宇），角色版权归 miHoYo，
+   不在 MIT 协议覆盖范围内。内置仅为这个免费非商业同人项目的使用方便，
+   如权利方提出异议，将第一时间从仓库和发行包中撤下。
+   其他 MMD 模型请用户自行从原发布页获取，并遵守其使用规则。
 
 Third-party components bundled with release builds:
 随发行版一起分发的第三方组件：

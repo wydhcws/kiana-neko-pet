@@ -1,52 +1,34 @@
 # 模型文件夹
 
-把下载好的 MMD 模型**整个文件夹**放进这里即可，程序会自动识别。
+这里存放 MMD 模型。把下载好的模型**整个文件夹**放进这里即可，程序会自动识别。
 
-> 也可以放在 `~/Downloads/`（旧版本的位置），程序两个地方都会找。
-> 安装包版本请放到菜单「模型 → 打开模型文件夹…」指向的目录。
+> 安装版请放到菜单「模型 → 打开模型文件夹…」指向的目录；
+> 放在 `~/Downloads/` 也能被找到（兼容旧版本）。
 
-## 为什么仓库里没有模型文件？
+## 内置模型
 
-这些模型是第三方为《崩坏3》角色制作的二次创作作品，每个模型压缩包里的
-`使用规则.txt` 都明确写着：
-
-```
-请勿二次配布
-请勿用于18禁作品，极端宗教宣传，血腥恐怖猎奇作品，人身攻击等
-请勿用于商业用途
-模型版权所属 miHoYo
-```
-
-**「二次配布」就是指把模型文件再分发给他人** —— 无论免费还是收费、开源还是闭源。
-所以本项目的仓库和安装包都**不包含任何模型文件**，只提供读取和适配的代码，
-模型请你自己从原发布页下载。这也是绝大多数 MMD 相关开源项目的通行做法。
-
-不下载模型完全不影响使用：**内置的 Q 版猫娘是纯代码程序化生成的**，
-开箱即用，没有任何版权负担。MMD 模型只是可选的进阶玩法。
-
-## 目录结构
-
-程序按下面的文件名查找，请保持解压出来的文件夹名不变：
+仓库和安装包里自带了四个模型，开箱即用：
 
 ```
 models/
-├── Kiana Kaslana - Herrscher of Flamescion/
-│   └── Kiana Kaslana - Herrscher of Flamescion.pmx     薪炎律者
-├── Kiana Kaslana - Herrscher of Finality/
-│   └── Kiana Kaslana.pmx                               终焉律者
-└── Kiana Kaslana - World Diva/
-    └── Kiana Kaslana - World Diva.pmx                  崩坏的歌姬 World Diva
+├── Kiana Kaslana - Herrscher of Flamescion/  薪炎律者
+│   └── Kiana Kaslana - Herrscher of Flamescion.pmx
+├── Kiana Kaslana - Herrscher of Finality/    终焉律者
+│   └── Kiana Kaslana.pmx
+├── Kiana Kaslana - World Diva/               崩坏的歌姬 World Diva
+│   └── Kiana Kaslana - World Diva.pmx
+└── 琪亚娜 咚琪小礼裙/                         咚琪小礼裙
+    └── 琪亚娜 咚琪小礼裙1.0.pmx
 ```
 
-文件夹名不一样也没关系 —— 用菜单里的「模型 → 选择其他 PMX 模型…」手动指定，
-任意 PMX/PMD 模型都能加载（窗口比例会用默认值，可能需要微调）。
+你也可以放更多自己的模型进来；文件夹名不一样也没关系，
+用菜单「模型 → 选择其他 PMX 模型…」手动指定即可，首次加载后窗口比例会自动适配。
 
-## 模型来源与致谢
+## 模型来源与版权
 
-| 模型 | 编辑者 | 版权 |
-| --- | --- | --- |
-| 薪炎律者 Herrscher of Flamescion | 神帝宇 | miHoYo |
-| 终焉律者 Herrscher of Finality | 神帝宇 | miHoYo |
-| 崩坏的歌姬 World Diva | 见模型包内说明 | miHoYo |
+这些模型由社区的大佬们制作，模型作者为 **神帝宇**
+（主页：<https://www.aplaybox.com/u/359396473/model> ），角色版权归 miHoYo。
 
-感谢模型作者的制作。使用时请遵守各模型自带的 `使用规则.txt`。
+本项目是免费、非商业的粉丝同人作品，内置模型只是为了方便使用。
+如果模型作者或 miHoYo 认为这样不妥，欢迎到仓库提 issue 联系，
+我们会第一时间把对应模型从仓库和安装包中撤下。

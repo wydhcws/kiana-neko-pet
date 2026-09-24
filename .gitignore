@@ -5,10 +5,9 @@ build/
 bin/
 native/mediaremote-adapter/build/
 
-# ───────── MMD 模型：严禁入库 ─────────
-# 模型是第三方二次创作作品，版权属 miHoYo，各模型的「使用规则.txt」明确写明
-# 「请勿二次配布」。因此模型文件既不进仓库，也不进 release 安装包，
-# 一律由用户自行从原发布页下载。详见 models/README.md。
+# ───────── MMD 模型：默认不入库 ─────────
+# 模型是第三方二次创作作品，版权属 miHoYo。默认全部排除，只有下面白名单里
+# 随程序一起分发的三个内置模型例外；其余模型由用户自行从原发布页下载。
 models/*
 !models/README.md
 
@@ -18,6 +17,16 @@ models/*
 *.vmd
 *.vpd
 *.pmm
+
+# 内置模型白名单（必须写在上面的忽略规则之后，才能覆盖它们）
+!models/Kiana Kaslana - Herrscher of Flamescion/
+!models/Kiana Kaslana - Herrscher of Finality/
+!models/Kiana Kaslana - World Diva/
+!models/琪亚娜 咚琪小礼裙/
+!models/Kiana Kaslana - Herrscher of Flamescion/**
+!models/Kiana Kaslana - Herrscher of Finality/**
+!models/Kiana Kaslana - World Diva/**
+!models/琪亚娜 咚琪小礼裙/**
 
 # ───────── 自用的开发笔记，不公开 ─────────
 KIANA_PET_REBUILD.md
