@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-eNQtIpUssT9EtMkvkpjsi9hLH/oLXeBTTkMOYDvarqk='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' data: blob:">
+<title>琪亚娜猫娘</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: transparent; user-select: none; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif; }
+  #scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  #bubble {
+    position: fixed; left: 50%; top: 8px; transform: translateX(-50%) scale(0.6);
+    max-width: 82%; min-width: 60px; box-sizing: border-box;
+    padding: 9px 14px; border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #f1f4ff 100%);
+    border: 2.5px solid #6c86e8; color: #33305a;
+    font-size: 13px; line-height: 1.5; font-weight: 600; text-align: center;
+    box-shadow: 0 3px 0 #c9d3ff, 0 6px 16px rgba(80, 90, 180, .25);
+    opacity: 0; transition: opacity .18s, transform .22s cubic-bezier(.3, 1.6, .5, 1);
+    pointer-events: none; word-break: normal; overflow-wrap: anywhere;
+  }
+  #bubble.show { opacity: 1; transform: translateX(-50%) scale(1); pointer-events: auto; cursor: pointer; }
+  #bubble::after {
+    content: ""; position: absolute; left: 50%; bottom: -10px; margin-left: -8px;
+    border: 8px solid transparent; border-top-color: #6c86e8; border-bottom: 0;
+  }
+  #bubble .name { color: #e0607e; margin-right: 4px; }
+  #bubble.long { max-width: 94%; font-size: 12px; line-height: 1.45; padding: 7px 12px; }
+  /* 空间实在不够时再降一档，尽量不裁字（歌词有时一句很长） */
+  #bubble.tiny { max-width: 96%; font-size: 11px; line-height: 1.35; padding: 6px 10px; border-width: 2px; border-radius: 14px; }
+  /* 真的放不下才裁，底部用渐隐提示还有内容，避免硬切一半的字 */
+  #bubble.clip { overflow: hidden; -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 100%); }
+  #bubble.lyric { border-color: #ef7fa0; box-shadow: 0 3px 0 #ffd3e0, 0 6px 16px rgba(220, 90, 140, .25); background: linear-gradient(180deg, #fff 0%, #fff1f6 100%); }
+  #bubble.lyric::after { border-top-color: #ef7fa0; }
+  .fx {
+    position: fixed; pointer-events: none; font-size: 20px; will-change: transform, opacity;
+    animation: float var(--d, 1.4s) ease-out forwards; text-shadow: 0 1px 2px rgba(0,0,0,.15);
+  }
+  @keyframes float {
+    0%   { transform: translate(-50%, 0) scale(.4); opacity: 0; }
+    15%  { transform: translate(-50%, -10px) scale(1.1); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--dx, 0px)), var(--dy, -90px)) scale(.9) rotate(var(--r, 0deg)); opacity: 0; }
+  }
+  .fish { animation: fish .9s ease-in forwards; }
+  @keyframes fish {
+    0%   { transform: translate(-50%, -60px) rotate(-30deg) scale(1.2); opacity: 0; }
+    20%  { opacity: 1; }
+    100% { transform: translate(-50%, 0) rotate(20deg) scale(.5); opacity: 0; }
+  }
+  #chat {
+    position: fixed; left: 50%; bottom: 10px; transform: translateX(-50%) translateY(8px);
+    width: 86%; opacity: 0; pointer-events: none; transition: opacity .15s, transform .2s;
+  }
+  #chat.show { opacity: 1; pointer-events: auto; transform: translateX(-50%); }
+  #chat input {
+    width: 100%; box-sizing: border-box; padding: 8px 12px; border-radius: 16px;
+    border: 2.5px solid #ef7fa0; background: rgba(255, 255, 255, .96); color: #33305a;
+    font: 600 13px "PingFang SC", "Microsoft YaHei", sans-serif; outline: none;
+    box-shadow: 0 3px 0 #ffd3e0, 0 6px 16px rgba(220, 90, 140, .25);
+  }
+  #chat.busy input { opacity: .6; }
+  #pomo {
+    position: fixed; right: 8px; bottom: 8px; padding: 2px 8px; border-radius: 10px;
+    background: rgba(255, 99, 99, .88); color: #fff; font-size: 12px; font-weight: 700;
+    display: none; pointer-events: none;
+  }
+</style>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <div id="bubble"></div>
+  <div id="pomo"></div>
+  <div id="chat"><input id="chat-input" maxlength="200" placeholder="和琪亚娜说点什么…（Esc 关闭）" autocomplete="off"></div>
+  <script type="importmap">{ "imports": { "three": "../node_modules/three/build/three.module.js" } }</script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

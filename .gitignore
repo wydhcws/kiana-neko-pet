@@ -1,0 +1,35 @@
+# ───────── 依赖与构建产物 ─────────
+node_modules/
+dist/
+build/
+bin/
+native/mediaremote-adapter/build/
+
+# ───────── MMD 模型：严禁入库 ─────────
+# 模型是第三方二次创作作品，版权属 miHoYo，各模型的「使用规则.txt」明确写明
+# 「请勿二次配布」。因此模型文件既不进仓库，也不进 release 安装包，
+# 一律由用户自行从原发布页下载。详见 models/README.md。
+models/*
+!models/README.md
+
+# 常见 MMD 资源后缀，双保险（防止误放到别的目录被提交）
+*.pmx
+*.pmd
+*.vmd
+*.vpd
+*.pmm
+
+# ───────── 自用的开发笔记，不公开 ─────────
+KIANA_PET_REBUILD.md
+
+# ───────── 本地配置与缓存 ─────────
+.env
+*.local
+voice-cache/
+lyrics-cache/
+*.log
+
+# ───────── 系统文件 ─────────
+.DS_Store
+Thumbs.db
+desktop.ini

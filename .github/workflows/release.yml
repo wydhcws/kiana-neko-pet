@@ -1,0 +1,99 @@
+name: Release
+
+# 推一个 v 开头的 tag 就会自动构建 macOS + Windows 安装包并发布到 Releases：
+#   npm version patch && git push --follow-tags
+# 也可以在 Actions 页面手动触发（只构建、不发布）。
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            name: macOS
+            cmd: npm run dist:mac
+          - os: windows-latest
+            name: Windows
+            cmd: npm run dist:win
+
+    runs-on: ${{ matrix.os }}
+    name: 构建 ${{ matrix.name }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      # 跟唱功能依赖的原生组件，仅 macOS 需要（Windows 上该脚本会自动跳过）
+      # mediaremote-adapter 已随仓库 vendor（BSD-3-Clause），这里直接编译即可
+      - name: 编译原生组件（macOS）
+        if: runner.os == 'macOS'
+        run: npm run build:native
+
+      - name: 生成图标
+        run: npm run icon
+
+      - name: 打包
+        run: ${{ matrix.cmd }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 没有 Apple 开发者证书，跳过签名与公证（用户首次打开需右键→打开）
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: |
+            dist/*.dmg
+            dist/*.zip
+            dist/*.exe
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    name: 发布 Release
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: 发布到 Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*
+          draft: false
+          generate_release_notes: true
+          body: |
+            ## 下载
+
+            | 系统 | 文件 |
+            | --- | --- |
+            | macOS (Apple Silicon) | `*-arm64.dmg` |
+            | macOS (Intel) | `*.dmg`（不带 arm64 后缀） |
+            | Windows 安装版 | `*-Setup-*.exe` |
+            | Windows 免安装版 | `*-portable.exe` |
+
+            > **macOS 提示「无法验证开发者」**：安装包未做 Apple 公证。
+            > 右键点 App → 打开 → 再点「打开」，或执行
+            > `xattr -cr "/Applications/琪亚娜猫娘.app"`。
+
+            > **不含 MMD 模型**：模型使用规则禁止二次配布，请自行下载后放入
+            > 菜单「模型 → 打开模型文件夹…」指向的目录。内置 Q 版猫娘开箱即用。
