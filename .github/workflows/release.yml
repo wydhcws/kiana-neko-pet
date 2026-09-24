@@ -92,7 +92,11 @@ jobs:
           draft: false
           generate_release_notes: true
           body: |
-            第一个版本，祝《崩坏3》十周年快乐！
+            ## v1.0.1
+
+            修复 v1.0.0 安装后打开报错 `Cannot find module './modlib'` 的问题（打包时漏了两个源码文件）。**请下载本版本，v1.0.0 已废弃。**
+
+            祝《崩坏3》十周年快乐！
 
             ## 下载
 

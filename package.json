@@ -1,6 +1,6 @@
 {
   "name": "kiana-neko-pet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "二次元萌系 3D 猫娘桌面助手（琪亚娜风格同人）",
   "main": "main.js",
   "author": "wydhcws",
@@ -36,6 +36,8 @@
     "files": [
       "main.js",
       "preload.js",
+      "modlib.js",
+      "characters.js",
       "voice.js",
       "lyrics.js",
       "ai.js",
