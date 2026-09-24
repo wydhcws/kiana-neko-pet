@@ -3,6 +3,9 @@ node_modules/
 dist/
 build/
 bin/
+# 但 adapter 自带的 perl 脚本是源码、必须随仓库分发，单独放开
+!native/mediaremote-adapter/bin/
+!native/mediaremote-adapter/bin/**
 native/mediaremote-adapter/build/
 
 # ───────── MMD 模型：默认不入库 ─────────
