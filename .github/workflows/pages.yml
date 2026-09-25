@@ -1,0 +1,45 @@
+name: Deploy site to GitHub Pages
+
+# 官网（site/ 目录）部署到 GitHub Pages，访问地址 https://kiana.mihayo.top
+# 只有 site/ 或本文件变动时才触发，改 App 代码、发版本 tag 都不会动官网。
+# 也可以在 Actions 页面手动触发。
+#
+# 注意：Settings → Pages 的 Source 必须选「GitHub Actions」，
+# 不能选「Deploy from a branch」（后者只认 / 和 /docs，认不了 site/）。
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只允许一个部署，新推送会取消还在跑的旧部署
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      # 只上传 site/ 目录作为站点根目录，仓库里的 App 源码不会被发布
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
